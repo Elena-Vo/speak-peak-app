@@ -1,0 +1,13 @@
+
+.main-page {
+    flex: 1;
+    display: flex;
+    padding: 16px;
+    justify-content: center; 
+    align-items: center;
+  }
+
+  .card-container {
+    width: 100%;
+    max-width: 600px; 
+  }

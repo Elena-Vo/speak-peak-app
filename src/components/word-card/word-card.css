@@ -1,0 +1,85 @@
+
+.word-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: 1fr auto; 
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  width: 600px;
+  margin: 0 auto;
+  height: 300px; 
+  gap: 16px; 
+}
+
+.word-card-left {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  border-right: 1px solid var(--border-color);
+}
+
+.word-card-left h2 {
+  font-size: 24px;
+  color: var(--text-color);
+}
+
+.word-card-right {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  background-image: url(/cat-bkg.png); 
+  background-size: cover; 
+  background-position: center; 
+  border-radius: 8px; 
+  position: relative; 
+}
+
+.show-button {
+  padding: 8px 16px;
+  background-color: var(--primary-color);  
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.show-button:hover {
+  opacity: 0.8;
+}
+
+.translation-content {
+  text-align: center;  
+  padding: 16px;
+  
+}
+
+.prev-button-container,
+.next-button-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.prev-button-container {
+  grid-column: 1; 
+}
+
+.next-button-container {
+  grid-column: 2; 
+}
+
+.prev-word-btn,
+.next-word-btn {
+  padding: 8px 16px;
+  background-color: var(--secondary-color);
+  
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.prev-word-btn:hover,
+.next-word-btn:hover {
+  opacity: 0.8;
+}

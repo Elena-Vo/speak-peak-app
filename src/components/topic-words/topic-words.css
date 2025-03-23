@@ -1,0 +1,77 @@
+
+.topic-words {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+  }
+  
+  
+  .topic-words table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .topic-words th, .topic-words td {
+    padding-top: 12px;
+    padding-right: 5px;
+    
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .topic-words th {
+    background-color: var(--primary-color);
+    
+  }
+
+  .topic-words input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+  }
+  
+  .topic-words button, .edit-button, .delete-button, .save-button, .cancel-button{
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    margin-right: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+  }
+
+  .delete-button {
+    background-color: #e74c3c; 
+  }
+  
+  .save-button {
+    background-color: #2ecc71; 
+    
+  }
+  
+  .cancel-button {
+    background-color: #95a5a6; 
+    
+  }
+  
+  .edit-button:hover, .delete-button:hover, .save-button:hover, .cancel-button:hover {
+    opacity: 0.8;
+  }
+
+  .add-word-button {
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 16px;
+  }
+  
+  .add-word-button:hover {
+    opacity: 0.8;
+  }
