@@ -10,13 +10,27 @@ import './index.css';
 import "./App.css"
 
 function App() {
+  const [selectedTopic, setSelectedTopic] = useState(null);
+  const [isTraining, setIsTraining] = useState(false);
+  
+  // выбор темы- отображение слов
+  const handleSelectTopic = (topicName) => {
+    setSelectedTopic(topicName);
+    setIsTraining(false);  
+  };
+
+  // переключение на карточки)
+  const handleStartTraining = (topicName) => {
+    setSelectedTopic(topicName);
+    setIsTraining(true); 
+  };
 
   return (
     <div className="app">
-      <Sidebar  />
+      <Sidebar onSelectTopic={handleSelectTopic} onStartTraining={handleStartTraining} />
       <div className="main-content">
         <Header />
-        <MainPage  />
+        <MainPage selectedTopic={selectedTopic} isTraining={isTraining}/>
         <Footer />
       </div>
     </div>

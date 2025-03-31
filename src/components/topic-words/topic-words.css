@@ -18,15 +18,11 @@
   .topic-words th, .topic-words td {
     padding-top: 12px;
     padding-right: 5px;
-    
     text-align: left;
     border-bottom: 1px solid var(--border-color);
   }
   
-  .topic-words th {
-    background-color: var(--primary-color);
-    
-  }
+
 
   .topic-words input {
     width: 100%;
@@ -36,26 +32,33 @@
   }
   
   .topic-words button, .edit-button, .delete-button, .save-button, .cancel-button{
-    padding: 8px 12px;
-    margin-bottom: 10px;
+    padding: 8px 8px;
+    margin-top: 10px;
     margin-right: 8px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 12px;  
 
+  }
+
+  .edit-button {
+    background-color: var(--primary-color);
   }
 
   .delete-button {
-    background-color: #e74c3c; 
+    background-color: #FFE4B5;
+    font-size: 12px;
+    
   }
   
   .save-button {
-    background-color: #2ecc71; 
+    background-color: #7fecaa; 
     
   }
   
   .cancel-button {
-    background-color: #95a5a6; 
+    background-color: #FFE4B5; 
     
   }
   
@@ -64,12 +67,13 @@
   }
 
   .add-word-button {
-    padding: 8px 16px;
+    padding: 8px 8px;
     background-color: var(--primary-color);
     border: none;
     border-radius: 4px;
     cursor: pointer;
     margin-bottom: 16px;
+    
   }
   
   .add-word-button:hover {
