@@ -28,4 +28,5 @@ function MainPage({ selectedTopic, isTraining}) {
 }
 
 
+
 export default MainPage;

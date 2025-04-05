@@ -109,4 +109,5 @@ function TopicWords({ words, topicName }) {
     </div>
   );
 }
-export default TopicWords;
+
+export default TopicWords; 

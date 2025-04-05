@@ -1,0 +1,90 @@
+.add-topic-page {
+    padding: 25px;
+    max-width: 620px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.add-topic-page h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.add-topic-page input[type="text"] {
+    width: 100%;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.add-topic-page input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.word-entry {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.add-word-button {
+    margin-bottom: 24px;
+    padding: 10px 18px;
+    background-color: #eee;
+    color: #333;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.add-word-button:hover {
+    background-color: #ddd;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.save-button,
+.add-word-button {
+    padding: 8px 16px;
+    background-color: var(--secondary-color);
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.save-button:hover {
+    background-color: #0056b3;
+}
+
+.add-word-button:hover {
+    background-color: #0056b3;
+}
+
+.cancel-button {
+    padding: 8px 16px;
+    background-color: #e0e0e0;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.cancel-button:hover {
+    background-color: #ccc;
+}

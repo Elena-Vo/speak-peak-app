@@ -4,19 +4,13 @@ import './sidebar.css';
 
 
 
-function Sidebar({ onSelectTopic, onStartTraining  }) {
+function Sidebar({ onSelectTopic, onStartTraining, onAddTopic  }) {
   const topics = [
     { id: 1, name: 'Тема 1', status: 'Учить' },
     { id: 2, name: 'Тема 2', status: 'В прогрессе' },
     { id: 3, name: 'Тема 3', status: 'Готово' },
   ];
 
-  // темы по статусам
-  /* const topicsByStatus = {
-    'Учить': topics.filter((topic) => topic.status === 'Учить'),
-    'В прогрессе': topics.filter((topic) => topic.status === 'В прогрессе'),
-    'Готово': topics.filter((topic) => topic.status === 'Готово'),
-  }; */
 
   const handleTopicClick = (topicName) => {
     onSelectTopic(topicName);  // Передача в Main-Page
@@ -42,7 +36,7 @@ function Sidebar({ onSelectTopic, onStartTraining  }) {
           ))}
         </ul>
       </div>
-      <button className="add-topic-btn">+ Добавить тему</button>
+      <button className="add-topic-btn"onClick={onAddTopic}>+ Добавить тему</button>
     </div>
   );
 }
