@@ -19,7 +19,7 @@ function Sidebar({ onSelectTopic, onStartTraining, onAddTopic  }) {
 
   return (
     <div className="sidebar">
-      <div className="logo">Speak-Peak</div>
+      {/* <div className="logo">Speak-Peak</div> */}
       <div className="sidebar-content">
         <h3 className="sidebar-title">Темы</h3>
         <ul className="topics-list">

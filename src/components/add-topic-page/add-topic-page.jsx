@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./add-topic-page.css";
+import React, { useState } from 'react';
+import './add-topic-page.css';
 
 function AddTopicPage({ onCancel }) {
     const [topicName, setTopicName] = useState("");
