@@ -2,7 +2,7 @@
 .word-card {
   display: grid;
   grid-template-columns: 1fr 1fr; 
-  grid-template-rows: 1fr auto; 
+  grid-template-rows: 1fr 4fr 1fr; 
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -39,6 +39,7 @@
 
 .show-button {
   padding: 8px 16px;
+  margin-top: 20px;
   background-color: var(--primary-color);  
   border: none;
   border-radius: 4px;
@@ -74,7 +75,6 @@
 .next-word-btn {
   padding: 8px 16px;
   background-color: var(--secondary-color);
-  
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -83,4 +83,44 @@
 .prev-word-btn:hover,
 .next-word-btn:hover {
   opacity: 0.8;
+}
+
+.card-header {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 14px;
+  max-height: 60px;
+}
+
+.learned-tag {
+  background-color: #e6ffe6;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: green;
+}
+
+.learn-button {
+  padding: 6px 12px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.learn-button:hover {
+  opacity: 0.85;
+}
+
+.show-button:focus {
+  outline: 2px solid blue;
+}
+
+.stats-link-container {
+  margin-top: 16px;
 }

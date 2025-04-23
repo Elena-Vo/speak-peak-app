@@ -23,87 +23,97 @@ function App() {
 
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [isTraining, setIsTraining] = useState(false);
-  const [isAddingTopic, setIsAddingTopic] = useState(false);
-  
-  //слова по теме
+  /* const [isAddingTopic, setIsAddingTopic] = useState(false); */
+
+  const [viewedCount, setViewedCount] = useState(0);     // Счетчик просмотренных
+  const [learnedCount, setLearnedCount] = useState(0);   // Счетчик выученных
+
+  // Получаем слова по выбранной теме
   const words = useMemo(() => {
     return selectedTopic
       ? wordsData.filter((word) => word.theme === selectedTopic)
       : [];
   }, [selectedTopic]);
-  
+
+  // Выбор темы
   const selectTopic = (topicName, training = false) => {
     setSelectedTopic(topicName);
     setIsTraining(training);
-    setIsAddingTopic(false);
-    if (location.pathname !== '/') navigate('/');
+    /* setIsAddingTopic(false); */
+    if (location.pathname !== "/") navigate("/");
   };
 
-
-  
-  // выбор темы- отображение слов
+  // Клик по теме
   const handleSelectTopic = (topicName) => {
     selectTopic(topicName, false);
   };
 
-  // переключение на карточки)
+  // Клик на "Тренировать"
   const handleStartTraining = (topicName) => {
     selectTopic(topicName, true);
   };
 
-  
-
-  // добавление темы
+  // Добавление новой темы
   const handleAddTopicClick = () => {
     setSelectedTopic(null);
     setIsTraining(false);
-    setIsAddingTopic(true);
-    setTimeout(() => {
-      navigate("/");
-    }, 0);
-};
+    navigate("/add-topic");
+  };
 
-const handleLogoClick = () => {
-  setSelectedTopic(null);
-  setIsTraining(false);
-  setIsAddingTopic(false);
-  navigate('/');
-};
+  // Клик по логотипу
+  const handleLogoClick = () => {
+    setSelectedTopic(null);
+    setIsTraining(false);
+    /* setIsAddingTopic(false); */
+    navigate("/");
+  };
 
-return (
-  <div className="app">
-    <Sidebar
-      onSelectTopic={handleSelectTopic}
-      onStartTraining={handleStartTraining}
-      onAddTopic={handleAddTopicClick}
-    />
-    <div className="main-content">
-      <Header onLogoClick={handleLogoClick} />
-      <div className="page-content">
+  // Увеличение счетчиков
+  const incrementViewedCount = () => setViewedCount((prev) => prev + 1);
+  const incrementLearnedCount = () => setLearnedCount((prev) => prev + 1);
+
+  return (
+    <div className="app">
+      <Sidebar
+        onSelectTopic={handleSelectTopic}
+        onStartTraining={handleStartTraining}
+        onAddTopic={handleAddTopicClick}
+      />
+      <div className="main-content">
+        <Header onLogoClick={handleLogoClick} />
+        <div className="page-content">
         <Routes>
-          <Route
-            path="/"
-            element={
-              isAddingTopic ? (
-                <AddTopicPage onCancel={() => setIsAddingTopic(false)} />
-              ) : (
-                <MainPage 
-                  selectedTopic={selectedTopic} 
-                  isTraining={isTraining} 
-                  words={words} 
+            <Route
+              path="/"
+              element={
+                <MainPage
+                  selectedTopic={selectedTopic}
+                  isTraining={isTraining}
+                  words={words}
+                  onViewed={incrementViewedCount}
+                  onLearned={incrementLearnedCount}
                 />
-              )
-            }
-          />
-          <Route path="/dictionary" element={<DictionaryPage />} />
-          <Route path="/stats" element={<StatsPage />} />
-          <Route path="/about" element={<AboutPage />} />
-        </Routes>
+              }
+            />
+            <Route path="/add-topic" element={<AddTopicPage onCancel={() => navigate("/")} />} />
+            <Route path="/dictionary" element={<DictionaryPage />} />
+            <Route
+              path="/stats"
+              element={
+                <StatsPage
+                  words={wordsData}
+                  viewedCount={viewedCount}
+                  learnedCount={learnedCount}
+                />
+              }
+            />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
-  </div>
-);
+  );
 }
 
 

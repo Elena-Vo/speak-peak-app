@@ -5,35 +5,35 @@ import './main-page.css';
 /* import wordsData from '../../data/words'; */
 import TopicWords from '../topic-words/topic-words'
 
-function MainPage({ selectedTopic, isTraining, words}) {
-  
-  
-
-    
+function MainPage({ selectedTopic, isTraining, words, onViewed, onLearned }) {
+  const updateStatus = (wordId, status) => {
+    const index = words.findIndex(word => word.id === wordId);
+    if (index !== -1) {
+      words[index].status = status;
+    }
+  };
 
   return (
     <div className="main-page">
-      {!selectedTopic && !isTraining && (
-        <div className="main-page-placeholder">
-          <h2>Добро пожаловать!</h2>
-          <p>Выбери тему из списка слева, чтобы увидеть список слов</p>
-          <p>или нажми кнопку "Тренировать", чтобы начать тренировку.</p>
-        </div>
-      )}
-
-      {selectedTopic && isTraining && (
-        <div className="training-mode">
-          <h2>Режим тренировки: {selectedTopic}</h2>
-          <WordCard words={words} />
-        </div>
-      )}
-
-      {selectedTopic && !isTraining && (
-        <TopicWords words={words} topicName={selectedTopic} />
+      {selectedTopic ? (
+        isTraining ? (
+          <WordCard
+            words={words}
+            onViewed={onViewed}
+            onLearned={onLearned}
+            updateStatus={updateStatus} 
+          />
+          
+        ) : (
+          <TopicWords words={words} />
+        )
+      ) : (
+        <p>Выберите тему для изучения</p>
       )}
     </div>
   );
 }
+
 
 
 

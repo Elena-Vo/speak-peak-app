@@ -1,19 +1,20 @@
-import React from 'react';
-import wordsData from '../../data/words';
-import './stats-page.css';
+import React from "react";
+import wordsData from "../../data/words";
+import "./stats-page.css";
 
-function StatsPage() {
-    const topics = [...new Set(wordsData.map((word) => word.theme))];
+function StatsPage({ words = [], viewedCount, learnedCount }) {
+    const topics = [...new Set(words.map((w) => w.theme))];
 
-    const getProgress = (words) => {
-        const total = words.length;
-        const toLearn = words.filter((w) => w.status === "Учить").length;
-        const inProgress = words.filter(
-            (w) => w.status === "В прогрессе"
+    const getProgress = (wordsForTopic) => {
+        const total = wordsForTopic.length;
+        const viewed = wordsForTopic.filter(
+            (w) => w.status === "Просмотрено"
         ).length;
-        const learned = words.filter((w) => w.status === "Готово").length;
+        const learned = wordsForTopic.filter(
+            (w) => w.status === "Готово"
+        ).length;
 
-        return { total, toLearn, inProgress, learned };
+        return { total, viewed, learned };
     };
 
     return (
@@ -24,29 +25,32 @@ function StatsPage() {
                     <tr>
                         <th>Тема</th>
                         <th>Всего слов</th>
-                        <th>Учить</th>
-                        <th>В прогрессе</th>
-                        <th>Готово</th>
+                        <th>Просмотрено</th>
+                        <th>Выучено</th>
                     </tr>
                 </thead>
                 <tbody>
                     {topics.map((topic) => {
-                        const words = wordsData.filter(
+                        const wordsForTopic = words.filter(
                             (w) => w.theme === topic
                         );
-                        const stats = getProgress(words);
+                        const stats = getProgress(wordsForTopic);
                         return (
                             <tr key={topic}>
                                 <td>{topic}</td>
                                 <td>{stats.total}</td>
-                                <td>{stats.toLearn}</td>
-                                <td>{stats.inProgress}</td>
+                                <td>{stats.viewed}</td>
                                 <td>{stats.learned}</td>
                             </tr>
                         );
                     })}
                 </tbody>
             </table>
+            <div className="progress-info">
+                <h2>Общая статистика:</h2>
+                <p>Просмотрено всего: {viewedCount}</p>
+                <p>Выучено всего: {learnedCount}</p>
+            </div>
         </div>
     );
 }
