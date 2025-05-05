@@ -4,6 +4,7 @@ import './topic-words.css';
 function TopicWords({ words, topicName }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedWords, setEditedWords] = useState(words);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     setEditedWords(words);
@@ -15,20 +16,61 @@ function TopicWords({ words, topicName }) {
 
   const handleCancelEdit = () => {
     setEditedWords(words);
+    setErrors({});
     setIsEditing(false);
   };
 
   const handleChange = (wordId, field, value) => {
-    setEditedWords((prevWords) =>
-      prevWords.map((word) =>
+    setEditedWords(prevWords =>
+      prevWords.map(word =>
         word.id === wordId ? { ...word, [field]: value } : word
       )
     );
+
+    // Удаляем ошибку при вводе
+    setErrors(prev => ({
+      ...prev,
+      [wordId]: {
+        ...prev[wordId],
+        [field]: !value.trim()
+      }
+    }));
+  };
+
+  const validateWords = () => {
+    const newErrors = {};
+    editedWords.forEach(word => {
+      const wordErrors = {};
+      if (!word.word.trim()) wordErrors.word = true;
+      if (!word.transcription.trim()) wordErrors.transcription = true;
+      if (!word.translation.trim()) wordErrors.translation = true;
+
+      if (Object.keys(wordErrors).length > 0) {
+        newErrors[word.id] = wordErrors;
+      }
+    });
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSaveEdit = () => {
-    setIsEditing(false);
-    // Здесь можно добавить логику сохранения в базу данных
+    if (validateWords()) {
+      console.log('Сохранены слова:', editedWords);
+      setIsEditing(false);
+    } else {
+      alert('Пожалуйста, заполните все поля перед сохранением.');
+    }
+  };
+
+  const handleAddWord = () => {
+    const newWord = {
+      id: Date.now(),
+      word: '',
+      transcription: '',
+      translation: '',
+      theme: topicName,
+    };
+    setEditedWords(prev => [...prev, newWord]);
   };
 
   return (
@@ -45,14 +87,20 @@ function TopicWords({ words, topicName }) {
           </tr>
         </thead>
         <tbody>
-          {editedWords.map((word) => (
+          {editedWords.map(word => (
             <tr key={word.id}>
               <td>
                 {isEditing ? (
                   <input
                     type="text"
+                    placeholder="Слово"
                     value={word.word}
-                    onChange={(e) => handleChange(word.id, 'word', e.target.value)}
+                    onChange={e =>
+                      handleChange(word.id, 'word', e.target.value)
+                    }
+                    className={`word-input ${
+                      errors[word.id]?.word ? 'input-error' : ''
+                    }`}
                   />
                 ) : (
                   word.word
@@ -62,8 +110,14 @@ function TopicWords({ words, topicName }) {
                 {isEditing ? (
                   <input
                     type="text"
+                    placeholder="Транскрипция"
                     value={word.transcription}
-                    onChange={(e) => handleChange(word.id, 'transcription', e.target.value)}
+                    onChange={e =>
+                      handleChange(word.id, 'transcription', e.target.value)
+                    }
+                    className={`word-input ${
+                      errors[word.id]?.transcription ? 'input-error' : ''
+                    }`}
                   />
                 ) : (
                   word.transcription
@@ -73,8 +127,14 @@ function TopicWords({ words, topicName }) {
                 {isEditing ? (
                   <input
                     type="text"
+                    placeholder="Перевод"
                     value={word.translation}
-                    onChange={(e) => handleChange(word.id, 'translation', e.target.value)}
+                    onChange={e =>
+                      handleChange(word.id, 'translation', e.target.value)
+                    }
+                    className={`word-input ${
+                      errors[word.id]?.translation ? 'input-error' : ''
+                    }`}
                   />
                 ) : (
                   word.translation
@@ -90,14 +150,15 @@ function TopicWords({ words, topicName }) {
         </tbody>
       </table>
 
-      
       {!isEditing ? (
         <button className="edit-button" onClick={handleEditClick}>
           Редактировать
         </button>
       ) : (
         <div className="button-group">
-          <button className="add-word-button">Добавить слово</button>
+          <button className="add-word-button" onClick={handleAddWord}>
+            Добавить слово
+          </button>
           <button className="save-button" onClick={handleSaveEdit}>
             Сохранить
           </button>

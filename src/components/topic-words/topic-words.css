@@ -79,3 +79,21 @@
   .add-word-button:hover {
     opacity: 0.8;
   }
+
+  .word-input {
+    width: 100%;
+    padding: 6px 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .word-input::placeholder {
+    color: #aaa;
+  }
+  
+  .input-error {
+    border-color: red;
+    background-color: #ffecec;
+  }
